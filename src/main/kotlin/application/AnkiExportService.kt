@@ -1,9 +1,20 @@
 package org.example.application
 
-import org.example.domain.Audio
-import org.example.domain.Translation
+import Card
 
-interface AnkiExportService {
-    fun exportCards (ankiFormat: MutableList<String>, outputFilePath: String): String
-    //  val fields = "${cardData.originalText}\u001f${cardData.translatedText} [sound:${cardData.audioFileName}]"
+// Der Service ist jetzt von den Implementierungen entkoppelt.
+class AnkiExportService(
+    private val csvWriter: CsvWriter,
+    private val scriptRunner: ScriptRunner
+) {
+    // Diese Methode bleibt dein öffentlicher Einstiegspunkt.
+    fun exportCards(cards: List<Card>, csvPath: String) {
+
+
+        // Delegiere das Schreiben der CSV-Datei an den CsvWriter.
+        csvWriter.write(cards, csvPath)
+
+        // Delegiere das Ausführen des Skripts an den ScriptRunner.
+        scriptRunner.run("create_deck.py", csvPath, csvPath)
+    }
 }
