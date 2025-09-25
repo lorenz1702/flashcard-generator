@@ -3,5 +3,5 @@ package org.example.application
 import org.example.domain.FlashcardData
 
 interface AnkiCardFormatter {
-    fun format(cardData: FlashcardData): String
+    operator fun invoke(cards: List<Card>): AnkiExportResult
 }
