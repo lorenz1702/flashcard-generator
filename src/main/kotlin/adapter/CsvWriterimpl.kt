@@ -4,10 +4,13 @@ import Card
 import SimpleBackCard
 import org.example.application.CsvWriter
 
-class CsvWriterimpl: CsvWriter {
-    override fun write(cards: List<Card>, outputPath: String): String {
-        File(outputPath).bufferedWriter().use { writer ->
-
+class CsvWriterimpl(
+    private val mediaDirectory: String = "output/flashcard"
+) : CsvWriter {
+    override fun write(cards: List<Card>, fileName: String):String {
+        val outputFile = File(mediaDirectory, fileName)
+        outputFile.parentFile.mkdirs()
+        outputFile.bufferedWriter().use { writer ->
             cards.forEach { card ->
                 val line = when (card) {
                     is SimpleBackCard -> {
@@ -18,7 +21,7 @@ class CsvWriterimpl: CsvWriter {
                 writer.write(line)
                 writer.newLine()
             }
-            return outputPath
+            return File(mediaDirectory, fileName).absolutePath
         }
     }
 }

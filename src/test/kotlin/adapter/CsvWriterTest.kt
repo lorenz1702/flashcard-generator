@@ -29,7 +29,7 @@ class CsvWriterimplTest {
         )
 
         // Definiere den erwarteten Pfad innerhalb des temporären Ordners
-        val outputFile = File(tempDir, "test_deck.csv")
+        val FileName ="test_deck"
 
         // Definiere den exakten Inhalt, den wir in der Datei erwarten
         val expectedContent = """
@@ -39,18 +39,19 @@ class CsvWriterimplTest {
 
         // 2. ACT (Ausführen)
         // Rufe die zu testende Methode auf
-        val returnedPath = csvWriter.write(testCards, outputFile.absolutePath)
+        val returnedPath = csvWriter.write(testCards, FileName)
 
         // 3. ASSERT (Überprüfen)
 
         // Überprüfe, ob der zurückgegebene Pfad korrekt ist
-        assertEquals(outputFile.absolutePath, returnedPath, "Der zurückgegebene Pfad sollte mit dem Eingabepfad übereinstimmen.")
+        assertEquals("/home/lorenz/IdeaProjects/flashcard-generator/output/flashcard/$FileName", returnedPath, "Der zurückgegebene Pfad sollte mit dem Eingabepfad übereinstimmen.")
 
         // Überprüfe, ob die Datei tatsächlich existiert
-        assertTrue(outputFile.exists(), "Die Ausgabedatei wurde nicht erstellt.")
+        val file = File(returnedPath)
+        assertTrue(file.exists(), "Die Ausgabedatei wurde nicht erstellt.")
 
         // Lies den Inhalt der erstellten Datei und vergleiche ihn mit der Erwartung
-        val actualContent = outputFile.readText().trim() // .trim() entfernt eventuelle letzte Leerzeilen
+        val actualContent = file.readText().trim() // .trim() entfernt eventuelle letzte Leerzeilen
         assertEquals(expectedContent, actualContent, "Der Inhalt der CSV-Datei ist nicht korrekt.")
     }
 
@@ -58,12 +59,13 @@ class CsvWriterimplTest {
     fun `write sollte eine leere Datei für eine leere Kartenliste erstellen`() {
         // Arrange
         val emptyCardList = emptyList<Card>()
-        val outputFile = File(tempDir, "empty_deck.csv")
+        var outputFile = File(tempDir, "empty_deck.csv")
 
         // Act
-        csvWriter.write(emptyCardList, outputFile.absolutePath)
+        val filepath = csvWriter.write(emptyCardList, outputFile.absolutePath)
 
         // Assert
+        outputFile = File(filepath)
         assertTrue(outputFile.exists(), "Die leere Datei sollte erstellt werden.")
         assertEquals("", outputFile.readText(), "Die Datei sollte leer sein.")
     }
