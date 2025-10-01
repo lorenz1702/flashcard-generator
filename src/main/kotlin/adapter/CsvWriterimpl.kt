@@ -14,8 +14,8 @@ class CsvWriterimpl(
             cards.forEach { card ->
                 val line = when (card) {
                     is SimpleBackCard -> {
-                        val back = "${card.hint} [sound:${card.audiofront}]"
-                        "${card.back}"
+                        val audioFileName = File(card.audiofront).name
+                        val back = "${"[sound:$audioFileName]"};${card.hint};${card.back}"
                     }
                 }
                 writer.write(line)
