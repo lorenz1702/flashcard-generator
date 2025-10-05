@@ -5,7 +5,7 @@ import SimpleBackCard
 import org.example.application.CsvWriter
 
 class CsvWriterimpl(
-    private val mediaDirectory: String = "output/flashcard"
+    private val mediaDirectory: String
 ) : CsvWriter {
     override fun write(cards: List<Card>, fileName: String):String {
         val outputFile = File(mediaDirectory, fileName)

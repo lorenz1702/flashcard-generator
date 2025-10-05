@@ -12,9 +12,9 @@ class AnkiExportService(
 
 
         // Delegiere das Schreiben der CSV-Datei an den CsvWriter.
-        csvWriter.write(cards, csvPath)
-
+        val csvPath = csvWriter.write(cards, "tmpl")
+        val apkgfilename = csvPath + ".apkg"
         // Delegiere das Ausführen des Skripts an den ScriptRunner.
-        scriptRunner.run("src/main/kotlin/adapter/create_deck.py", csvPath, csvPath)
+        scriptRunner.run("src/main/kotlin/adapter/create_deck.py", csvPath, apkgfilename)
     }
 }

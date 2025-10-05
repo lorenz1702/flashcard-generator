@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.2.10"
+
 }
 
 group = "org.example"
@@ -8,17 +9,28 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
-
+val ktorVersion = "2.3.11"
 dependencies {
     // --- Ktor ---
-    implementation("io.ktor:ktor-server-core-jvm:2.3.9")
-    implementation("io.ktor:ktor-server-netty-jvm:3.3.0")
-    implementation("io.ktor:ktor-client-core:3.3.0")
-    implementation("io.ktor:ktor-client-cio:2.3.9")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.9")
+    // Ktor Server Dependencies
+    implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
+
+    // Ktor Test Dependencies
+    testImplementation("io.ktor:ktor-server-test-host-jvm:$ktorVersion")
+    testImplementation("io.ktor:ktor-client-core-jvm:$ktorVersion")
+    testImplementation("io.ktor:ktor-client-cio-jvm:$ktorVersion")
+
+    // JUnit 5 Dependency
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    // Ktor needs a logging framework
+    implementation("ch.qos.logback:logback-classic:1.4.14")
 
     // --- Logging ---
     implementation("ch.qos.logback:logback-classic:1.4.14")
+
+    testImplementation("io.ktor:ktor-server-test-host-jvm:2.3.11")
 
     // --- Testing ---
     testImplementation(kotlin("test"))

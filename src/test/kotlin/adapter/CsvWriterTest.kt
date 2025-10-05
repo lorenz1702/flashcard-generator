@@ -17,7 +17,7 @@ class CsvWriterimplTest {
     lateinit var tempDir: File
 
     // Die zu testende Klasse
-    private val csvWriter = CsvWriterimpl()
+    private val csvWriter = CsvWriterimpl("flashcard/output/test")
 
     @Test
     fun `write sollte eine CSV-Datei mit korrektem Inhalt und Pfad erstellen`() {

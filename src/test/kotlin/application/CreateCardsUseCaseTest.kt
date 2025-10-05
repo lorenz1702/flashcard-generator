@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test
 class CreateCardsUseCaseTest {
     private val seperatetor = SeperateStringServiceImpl()
     private val translator = GoogleTranslationService()
-    private val ttsService = GoogleTtsService()
+    private val ttsService = GoogleTtsService("flashcard/output/test")
     private val createCardsUseCaseTest = CreateCardsUseCase(seperatetor, translator, ttsService
 
     )

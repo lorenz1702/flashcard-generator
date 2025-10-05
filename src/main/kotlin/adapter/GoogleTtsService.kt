@@ -10,7 +10,7 @@ import java.net.URLEncoder
 import java.util.UUID
 
 class GoogleTtsService (
-    private val mediaDirectory: String = "output/media"
+    private val mediaDirectory: String
 ) : TtsService {
 
     init {
