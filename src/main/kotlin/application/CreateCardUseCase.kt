@@ -7,7 +7,6 @@ import java.util.UUID
 
 class CreateCardsUseCase (
     private val seperateStringService: SeperateStringService,
-    //private val ankiExportService: AnkiExportService? = null,
     private val translationService: TranslationService,
     private val ttsService: TtsService
 
@@ -32,7 +31,6 @@ class CreateCardsUseCase (
         // 3. Convert the read-only List from 'map' to a MutableList to match the return type
         return cards.toMutableList()
     }
-
 
 
 }

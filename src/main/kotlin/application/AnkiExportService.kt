@@ -15,6 +15,6 @@ class AnkiExportService(
         csvWriter.write(cards, csvPath)
 
         // Delegiere das Ausführen des Skripts an den ScriptRunner.
-        scriptRunner.run("create_deck.py", csvPath, csvPath)
+        scriptRunner.run("src/main/kotlin/adapter/create_deck.py", csvPath, csvPath)
     }
 }
